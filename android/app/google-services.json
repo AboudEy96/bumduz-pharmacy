@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "659474133610",
+    "project_id": "bumduz-pharmacy",
+    "storage_bucket": "bumduz-pharmacy.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659474133610:android:bffc97678fa40853195013",
+        "android_client_info": {
+          "package_name": "eng.bumduz.pharmacy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbHL7MRaxIqJuiCgzzfCxzEIXAuNv7yNI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

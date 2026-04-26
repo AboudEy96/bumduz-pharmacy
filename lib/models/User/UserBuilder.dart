@@ -1,6 +1,4 @@
 import 'package:pharmacy/models/User/User.dart';
-import 'package:pharmacy/models/User/UserList.dart';
-import 'UserList.dart';
 
 class UserBuilder {
   int? _id;
@@ -32,8 +30,6 @@ class UserBuilder {
       name: _name!,
       role: _role!,
     );
-
-UserList().addUser(user);
     return user;
   }
 }

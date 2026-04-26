@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmacy/Service/UserService.dart';
 import 'package:pharmacy/firebase_options.dart';
 import 'package:pharmacy/models/User/User.dart';
 import 'package:pharmacy/models/User/UserBuilder.dart';
-import 'package:pharmacy/models/User/UserList.dart';
 
 void main() async{
 
@@ -11,28 +11,22 @@ void main() async{
 
   await Firebase.initializeApp(options:
   DefaultFirebaseOptions.currentPlatform);
-testUsers();
-  runApp(const MyApp());
+
+
+  testUsers();
+
+
+runApp(const MyApp());
 
 }
-void testUsers() {
+Future<void> testUsers() async
+{
   // how to create user
   User us1 = new UserBuilder().setId(1).setName("Abdulkadir").setRole("pharmacist").build();
   User us2 = new UserBuilder().setId(2).setName("Mohammed").setRole("patient").build();
-  User us3 = new UserBuilder().setId(3).setRole("Moaz").setRole("rpharmacist").build();
-  // searchs for user and get it
-  var mohammedUser = UserList().getUserByName("Mohammed");
-  User? abdulkadirUser = UserList().getUserByName("Abdulkadir");
+  User us3 = new UserBuilder().setId(3).setName("Moaz").setRole("rpharmacist").build();
 
-  // change user name
-  us3?.setName("Muaz");
-
-  // prints the users we find from username search
-  abdulkadirUser?.getUserInfo();
-  mohammedUser?.getUserInfo();
-
-  // prints info of user
-  us3.getUserInfo();
+  await UserService().addUser(us1);
 }
 
 class MyApp extends StatelessWidget {

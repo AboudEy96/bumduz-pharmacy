@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pharmacy/screens/patient/my_medicines_screen.dart';
+import 'package:pharmacy/screens/patient/reminders_screen.dart';
 
 class PatientHomeScreen extends StatelessWidget {
   final String userName;
@@ -42,7 +44,14 @@ class PatientHomeScreen extends StatelessWidget {
                 leading: const Icon(Icons.medication),
                 title: const Text('My Medicines'),
                 subtitle: const Text('View your medicine schedule'),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const MyMedicinesScreen(),
+                    ),
+                  );
+                },
               ),
             ),
             Card(
@@ -50,7 +59,14 @@ class PatientHomeScreen extends StatelessWidget {
                 leading: const Icon(Icons.notifications),
                 title: const Text('Reminders'),
                 subtitle: const Text('Check medicine reminders'),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const RemindersScreen(),
+                    ),
+                  );
+                },
               ),
             ),
           ],

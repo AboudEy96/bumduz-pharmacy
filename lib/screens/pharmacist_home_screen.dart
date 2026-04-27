@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pharmacy/screens/pharmacist/add_medicine_screen.dart';
+import 'package:pharmacy/screens/pharmacist/manage_medicines_screen.dart';
 
 class PharmacistHomeScreen extends StatelessWidget {
   final String userName;
@@ -42,7 +44,14 @@ class PharmacistHomeScreen extends StatelessWidget {
                 leading: const Icon(Icons.add_box),
                 title: const Text('Add Medicine'),
                 subtitle: const Text('Add new medicine to the system'),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const AddMedicineScreen(),
+                    ),
+                  );
+                },
               ),
             ),
             Card(
@@ -50,7 +59,14 @@ class PharmacistHomeScreen extends StatelessWidget {
                 leading: const Icon(Icons.inventory),
                 title: const Text('Manage Medicines'),
                 subtitle: const Text('Update or delete medicine records'),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ManageMedicinesScreen(),
+                    ),
+                  );
+                },
               ),
             ),
           ],

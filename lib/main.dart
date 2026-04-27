@@ -1,23 +1,23 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmacy/Service/UserService.dart';
-import 'package:pharmacy/firebase_options.dart';
 import 'package:pharmacy/models/User/User.dart';
 import 'package:pharmacy/models/User/UserBuilder.dart';
+import 'pharmacist_view.dart';
 
 void main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(options:
-  DefaultFirebaseOptions.currentPlatform);
+// await Firebase.initializeApp(options:
+// DefaultFirebaseOptions.currentPlatform);
 
 
-  testUsers();
+  // testUsers();
 
-
-runApp(const MyApp());
-
+  runApp(const MaterialApp(
+    home: PharmacistView(),
+  ));
 }
 Future<void> testUsers() async
 {
@@ -25,8 +25,9 @@ Future<void> testUsers() async
   User us1 = new UserBuilder().setId(1).setName("Abdulkadir").setRole("pharmacist").build();
   User us2 = new UserBuilder().setId(2).setName("Mohammed").setRole("patient").build();
   User us3 = new UserBuilder().setId(3).setName("Moaz").setRole("rpharmacist").build();
-
+  User us4 = new UserBuilder().setId(4).setName("abdullah").setRole("pharmacistAPP").build();
   await UserService().addUser(us1);
+  await UserService().addUser(us4);
 }
 
 class MyApp extends StatelessWidget {

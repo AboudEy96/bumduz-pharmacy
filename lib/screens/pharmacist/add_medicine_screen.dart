@@ -5,15 +5,21 @@ class AddMedicineScreen extends StatefulWidget {
 
   @override
   State<AddMedicineScreen> createState() => _AddMedicineScreenState();
+
 }
 
 class _AddMedicineScreenState extends State<AddMedicineScreen> {
+
+  // Geçici ilaç listesi (mock data)
+  List<Map<String, String>> ilacListesi = [];
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController dosageController = TextEditingController();
   final TextEditingController timeController = TextEditingController();
   final TextEditingController quantityController = TextEditingController();
   final TextEditingController userIdController = TextEditingController();
 
+  // İlaç kaydetme fonksiyonu (mock data ile)
   void saveMedicine() {
     final String name = nameController.text.trim();
     final String dosage = dosageController.text.trim();
@@ -21,6 +27,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
     final String quantity = quantityController.text.trim();
     final String userId = userIdController.text.trim();
 
+    // Form kontrolü
     if (name.isEmpty ||
         dosage.isEmpty ||
         time.isEmpty ||
@@ -34,12 +41,25 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
       return;
     }
 
+    // Veriyi listeye ekle
+    setState(() {
+      ilacListesi.add({
+        "name": name,
+        "dosage": dosage,
+        "time": time,
+        "quantity": quantity,
+        "userId": userId,
+      });
+    });
+
+    // Başarı mesajı
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Medicine added successfully (Mock Data)'),
+        content: Text('Medicine added successfully'),
       ),
     );
 
+    // Alanları temizle
     nameController.clear();
     dosageController.clear();
     timeController.clear();
@@ -158,6 +178,26 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                       style: TextStyle(fontSize: 18),
                     ),
                   ),
+                ),
+                const SizedBox(height: 16),
+
+// Eklenen ilaçları göster
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: ilacListesi.length,
+                  itemBuilder: (context, index) {
+                    final ilac = ilacListesi[index];
+
+                    return Card(
+                      child: ListTile(
+                        title: Text(ilac["name"]!),
+                        subtitle: Text(
+                          "User: ${ilac["userId"]} | Time: ${ilac["time"]}",
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "27.0.12077973"
+    namespace = "eng.bumduz.pharmacy"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

@@ -1,0 +1,37 @@
+{
+  "firestore": {
+    "database": "(default)",
+    "location": "europe-west1",
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "bumduz-pharmacy",
+          "appId": "1:659474133610:android:bffc97678fa40853195013",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "bumduz-pharmacy",
+          "configurations": {
+            "android": "1:659474133610:android:bffc97678fa40853195013",
+            "ios": "1:659474133610:ios:58d950886e030db2195013",
+            "web": "1:659474133610:web:b0f515984e9a0697195013"
+          }
+        }
+      }
+    }
+  }
+}

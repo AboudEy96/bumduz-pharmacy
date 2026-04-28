@@ -1,0 +1,49 @@
+# FLUTTER / DART
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub/
+.pub-cache/
+build/
+flutter_export_environment.sh
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# LOGS
+*.log
+debug.log
+
+# FIREBASE
+.firebase/
+firebase-debug.log
+
+# ANDROID
+android/app/build/
+android/build/
+android/.gradle/
+
+# IMPORTANT (Firebase config)
+android/app/google-services.json
+
+# IOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework/
+ios/Flutter/Flutter.podspec
+ios/Runner.xcworkspace/
+ios/Runner.xcodeproj/project.xcworkspace/
+
+# NODE (if used)
+node_modules/
+package-lock.json
+
+# GENERATED DOCS
+**/doc/api/

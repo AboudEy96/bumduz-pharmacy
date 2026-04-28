@@ -47,3 +47,6 @@ package-lock.json
 
 # GENERATED DOCS
 **/doc/api/
+
+# AI TOOLS / AGENTS
+.agents/

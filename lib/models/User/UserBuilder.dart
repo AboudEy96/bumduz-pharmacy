@@ -4,7 +4,8 @@ class UserBuilder {
   int? _id;
   String? _name;
   String? _role;
-
+  String? _email;
+  String? _password;
   UserBuilder setId(int id) {
     _id = id;
     return this;
@@ -19,6 +20,14 @@ class UserBuilder {
     _role = role;
     return this;
   }
+  UserBuilder setPassword(String password) {
+    _password = password;
+    return this;
+  }
+  UserBuilder setEmail(String mail) {
+    _email = mail;
+    return this;
+  }
 
   User build() {
     if (_id == null || _name == null || _role == null) {
@@ -29,6 +38,8 @@ class UserBuilder {
       id: _id!,
       name: _name!,
       role: _role!,
+      email: _email!,
+      password: _password!,
     );
     return user;
   }

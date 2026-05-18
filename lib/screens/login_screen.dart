@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharmacy/Service/UserService.dart';
 import 'package:pharmacy/data/mock_users.dart';
 import 'package:pharmacy/screens/patient_home_screen.dart';
 import 'package:pharmacy/screens/pharmacist_home_screen.dart';
@@ -16,42 +17,23 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isPasswordVisible = false;
 
-  void login() {
-    final String email = emailController.text.trim();
-    final String password = passwordController.text.trim();
+  void login() async {
+    final user = await UserService().login(
+      emailController.text.trim(),
+      passwordController.text.trim(),
+    );
 
-    if (email.isEmpty || password.isEmpty) {
-      showMessage('Please enter email and password');
+    if (user == null) {
+      showMessage('User not found');
       return;
     }
 
-    final user = mockUsers.where((user) {
-      return user['email'] == email && user['password'] == password;
-    }).toList();
-
-    if (user.isEmpty) {
-      showMessage('Invalid email or password');
-      return;
-    }
-
-    final loggedUser = user.first;
-    final String name = loggedUser['name'] ?? '';
-    final String role = loggedUser['role'] ?? '';
-
-    if (role == 'pharmacist') {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => PharmacistHomeScreen(userName: name),
-        ),
-      );
+    if (user.role == 'pharmacist') {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (_) => PharmacistHomeScreen(userName: user.name)));
     } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => PatientHomeScreen(userName: name),
-        ),
-      );
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (_) => PatientHomeScreen(userName: user.name)));
     }
   }
 

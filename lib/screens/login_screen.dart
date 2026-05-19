@@ -3,7 +3,7 @@ import 'package:pharmacy/Service/UserService.dart';
 import 'package:pharmacy/data/mock_users.dart';
 import 'package:pharmacy/screens/patient_home_screen.dart';
 import 'package:pharmacy/screens/pharmacist_home_screen.dart';
-
+import 'package:pharmacy/screens/register_screen.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -144,6 +144,22 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Login',
                           style: TextStyle(fontSize: 18),
                         ),
+                      ),
+
+                    ),
+                    const SizedBox(height: 12),
+
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const RegisterScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        "Create New Account",
                       ),
                     ),
 

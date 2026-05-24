@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'Mock Login',
+                      'Enter your email and password to log-in',
                       style: TextStyle(color: Colors.grey),
                     ),
                     const SizedBox(height: 32),

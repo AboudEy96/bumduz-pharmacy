@@ -25,7 +25,6 @@ class UserService {
 //..,,.,.,.
     await docRef.set(user.toMap());
   }
-
   Future<List<User>> getUsers() async {
     final snapshot = await _db.collection('users').get();
 
@@ -41,6 +40,9 @@ class UserService {
       );
     }).toList();
   }
+  Future<void> addUserWithUid(String uid, User user) async {
+    await _db.collection('users').doc(uid).set(user.toMap());
+  }
 
   Future<User?> getUserById(String uid) async {
     final doc = await _db.collection('users').doc(uid).get();
@@ -51,4 +53,6 @@ class UserService {
   Future<void> deleteUser(int id) async {
     await _db.collection('users').doc(id.toString()).delete();
   }
+
+
 }

@@ -1,4 +1,12 @@
+import 'dart:math';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmacy/Service/UserService.dart';
+import 'package:pharmacy/abbreviations/MySnackBar.dart';
+import 'package:pharmacy/models/User/User.dart';
+import 'package:pharmacy/models/User/UserBuilder.dart';
+import 'package:pharmacy/screens/pharmacist_home_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -16,38 +24,52 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   String selectedRole = "patient";
 
-  void register() {
+  Future<void> register() async {
+    MySnackBar.send(context, "register clicked.");
 
     if (nameController.text.isEmpty ||
         emailController.text.isEmpty ||
         passwordController.text.isEmpty ||
         confirmPasswordController.text.isEmpty) {
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please fill all fields"),
-        ),
-      );
-
+      MySnackBar.send(context, "Please fill all fields");
       return;
     }
 
     if (passwordController.text != confirmPasswordController.text) {
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Passwords do not match"),
-        ),
-      );
-
+      MySnackBar.send(context, "Password does not match");
       return;
     }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("Register screen ready (Mock UI)"),
-      ),
-    );
+    try {
+      final credential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
+      final uid = credential.user!.uid;
+
+      var us1 = UserBuilder()
+          .setId(uid.hashCode)
+          .setEmail(emailController.text)
+          .setPassword(passwordController.text)
+          .setName(nameController.text)
+          .setRole(selectedRole)
+          .build();
+
+      await UserService().addUserWithUid(uid, us1);
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => PharmacistHomeScreen(userName: us1.name),
+        ),
+      );
+
+      MySnackBar.send(context, "Welcome ${us1.name} !");
+    } catch (e) {
+      MySnackBar.send(context, "Error: $e");
+    }
   }
 
   Widget buildTextField({

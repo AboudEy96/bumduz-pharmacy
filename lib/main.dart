@@ -6,16 +6,17 @@ import 'package:pharmacy/models/User/User.dart';
 import 'package:pharmacy/models/User/UserBuilder.dart';
 import 'package:pharmacy/screens/login_screen.dart';
 
- void main() async{
-
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(options:
-  DefaultFirebaseOptions.currentPlatform);
-  testUsers();
-  runApp(const PharmacyApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
+  runApp(const PharmacyApp());
 }
+
+
 Future<void> testUsers() async
 {
   // how to create user

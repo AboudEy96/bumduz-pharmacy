@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmacy/Service/UserService.dart';
 import 'package:pharmacy/data/mock_users.dart';
@@ -18,22 +19,40 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isPasswordVisible = false;
 
   void login() async {
-    final user = await UserService().login(
-      emailController.text.trim(),
-      passwordController.text.trim(),
-    );
+    try {
+      final credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
 
-    if (user == null) {
-      showMessage('User not found');
-      return;
-    }
+      final uid = credential.user!.uid;
 
-    if (user.role == 'pharmacist') {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (_) => PharmacistHomeScreen(userName: user.name)));
-    } else {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (_) => PatientHomeScreen(userName: user.name)));
+      final user = await UserService().getUserById(uid);
+
+      if (user == null) {
+        showMessage('User data not found in Firestore');
+        return;
+      }
+
+      if (user.role == 'pharmacist') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => PharmacistHomeScreen(userName: user.name),
+          ),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => PatientHomeScreen(userName: user.name),
+          ),
+        );
+      }
+
+    } catch (e) {
+      showMessage("Login failed: $e");
     }
   }
 

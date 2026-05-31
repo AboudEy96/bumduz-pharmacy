@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharmacy/screens/pharmacist/add_medicine_screen.dart';
 
 class MyMedicinesScreen extends StatelessWidget {
   const MyMedicinesScreen({super.key});
@@ -65,6 +66,20 @@ class MyMedicinesScreen extends StatelessWidget {
                 ),
               ),
               isThreeLine: true,
+            ),
+          );
+        },
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.teal,
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const AddMedicineScreen(),
+
             ),
           );
         },

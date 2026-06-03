@@ -18,6 +18,7 @@ class PharmacistHomeScreen extends StatelessWidget {
         backgroundColor: Colors.teal,
         foregroundColor: Colors.white,
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -48,7 +49,7 @@ class PharmacistHomeScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const AddMedicineScreen(),
+                      builder: (_) => const AddMedicineScreen(isPharmacist: true),
                     ),
                   );
                 },
